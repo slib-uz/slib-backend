@@ -1,0 +1,67 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      target_env:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on:
+      - self-hosted
+      - Linux
+    container:
+      image: alpine:3.20
+      options: --user root
+    environment: ${{ inputs.target_env }}
+    steps:
+      - name: Deploy via SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          TARGET_HOST: ${{ secrets.TARGET_HOST }}
+          TARGET_USER: ${{ secrets.TARGET_USER }}
+          TARGET_PORT: ${{ secrets.TARGET_PORT }}
+          TARGET_PATH: ${{ secrets.TARGET_PATH }}
+          GHCR_USER: ${{ secrets.GHCR_USER }}
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
+        run: |
+          set -euo pipefail
+
+          apk add --no-cache openssh-client
+          mkdir -p /root/.ssh && chmod 700 /root/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > /root/.ssh/deploy_key
+          chmod 600 /root/.ssh/deploy_key
+
+          ssh-keyscan -p "$TARGET_PORT" -H "$TARGET_HOST" >> /root/.ssh/known_hosts
+
+          cat > /root/.ssh/config <<EOF
+          Host target
+            HostName ${TARGET_HOST}
+            User ${TARGET_USER}
+            Port ${TARGET_PORT}
+            IdentityFile /root/.ssh/deploy_key
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+          EOF
+
+          chmod 600 /root/.ssh/config
+
+          ssh -o BatchMode=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 target "
+            set -euo pipefail
+            cd '${TARGET_PATH}'
+
+            export DOCKER_CONFIG=\$(mktemp -d)
+
+            echo '${GHCR_PAT}' \
+              | docker login 'ghcr.io' -u '${GHCR_USER}' --password-stdin \
+              1>/dev/null
+
+            docker compose --env-file ../env/.env pull
+            docker compose --env-file ../env/.env up -d
+
+            docker image prune -af
+
+            rm -rf \"\$DOCKER_CONFIG\"
+          "

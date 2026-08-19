@@ -1,0 +1,108 @@
+services:
+
+  slib-app:
+    image: ghcr.io/integrum-inc/slib/app-dev:latest
+    container_name: slib-app
+    entrypoint: [ "./app", "--mode", "http" ]
+
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./../assets:/app/assets
+      - ./../logs:/app/logs
+    env_file:
+      - ../env/.env
+    depends_on:
+      slib-postgres:
+        condition: service_healthy
+    networks:
+      - shared_network
+
+    restart: unless-stopped
+
+  slib-postgres:
+    image: postgres:17
+    container_name: slib-postgres-db
+    ports:
+      - "5433:5432"
+    env_file:
+      - ../env/.env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./.volumes/pg_data:/var/lib/postgresql/data
+    networks:
+      - shared_network
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+
+  slib-redis:
+    image: redis:7.4-alpine
+    command: redis-server
+    container_name: slib-redis-queue
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.volumes/redis:/data
+    networks:
+      - shared_network
+
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+    restart: unless-stopped
+
+
+  slib-task-worker:
+    image: ghcr.io/integrum-inc/slib/app-dev:latest
+    container_name: slib-task-worker
+    entrypoint: [ "./app", "--mode", "task-worker" ]
+
+    volumes:
+      - ./../assets:/app/assets
+    env_file:
+      - ../env/.env
+    depends_on:
+      slib-postgres:
+        condition: service_healthy
+      slib-redis:
+        condition: service_healthy
+    networks:
+      - shared_network
+
+    restart: unless-stopped
+
+  slib-scheduler:
+    image: ghcr.io/integrum-inc/slib/app-dev:latest
+    container_name: slib-scheduler
+    entrypoint: [ "./app", "--mode", "scheduler" ]
+
+    env_file:
+      - ../env/.env
+    depends_on:
+      slib-redis:
+        condition: service_healthy
+    networks:
+      - shared_network
+
+    restart: unless-stopped
+
+
+networks:
+  shared_network:
+    driver: bridge

@@ -1,0 +1,44 @@
+include ../env/.env
+include ../env/.env.test
+export $(shell sed 's/=.*//' ../env/.env)
+export $(shell sed 's/=.*//' ../env/.env.test)
+
+ATLASGO := atlas
+# migrate
+db-apply:
+	@echo "Applying migrations to local..."
+	@$(ATLASGO) migrate apply --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable" --revisions-schema public
+	@echo "✅ Migration applied successfully\n"
+
+db-appy-allow-dirty:
+	@echo "Applying migrations to local (allowing dirty state)..."
+	@$(ATLASGO) migrate apply --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable" --revisions-schema public --allow-dirty
+	@echo "✅ Migration applied successfully (dirty state allowed)\n"
+
+# show migrations
+db-status:
+	@echo "Checking migration status..."
+	@atlas migrate status --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable"
+
+
+# migrate down
+db-down:
+	@echo "Rolling back the last migration..."
+	@$(ATLASGO) migrate down --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable" --revisions-schema public
+	@echo "✅ Migration rolled back successfully\n"
+
+# 🔹 1-holat: versiyalar tartibsiz, lekin conflict yo‘q
+migrate-reorder:
+	@echo "🔄 Running migrations in non-linear (out-of-order) mode..."
+	@$(ATLASGO) migrate apply --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable" --exec-order non-linear --revisions-schema public
+	@echo "✅ Non-linear migrations executed successfully\n"
+
+# 🔹 2-holat: conflict bor → clean + qayta apply
+migrate-reset:
+	@echo "⚠️ Cleaning local database and Atlas migration history..."
+	@$(ATLASGO) schema clean --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable"
+
+	@echo "🔄 Re-applying migrations from scratch..."
+	@$(ATLASGO) migrate apply --env $(MIGRATION_ENV) -u "$(DB_CONNECTION_URL)?sslmode=disable" --revisions-schema public
+
+	@echo "✅ Local schema fully reset and migrated\n"

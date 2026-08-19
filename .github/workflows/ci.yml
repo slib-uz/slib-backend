@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ develop, main ]
+    paths:
+      - src/**
+      - cmd/**
+      - go.mod
+      - go.sum
+      - docker/Dockerfile
+      - .github/workflows/**
+
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "What to run"
+        required: true
+        type: choice
+        options:
+          - build-and-deploy
+          - build-only
+          - deploy-only
+      environment:
+        description: "Deploy environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+
+jobs:
+  # develop/main ga merge qilish avtomatik deploy qiladi, shuning uchun testlar
+  # build'dan oldin va uni to'sib turadigan bosqich sifatida yuriladi.
+  test:
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.action != 'deploy-only')
+    uses: ./.github/workflows/test.yml
+    permissions:
+      contents: read
+    secrets: inherit
+
+  build:
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.action != 'deploy-only')
+    needs: [ test ]
+    uses: ./.github/workflows/build.yml
+    permissions:
+      contents: read
+      packages: write
+    secrets: inherit
+
+  # "success yoki skipped" ataylab: testlar yiqilsa build "skipped" bo'ladi,
+  # "failure" emas — faqat "!= failure" ga qarasak, deploy baribir ketardi.
+  # "skipped" esa deploy-only ishga tushirish uchun kerak.
+  deploy:
+    if: >
+      always() &&
+      (needs.test.result == 'success' || needs.test.result == 'skipped') &&
+      (needs.build.result == 'success' || needs.build.result == 'skipped') &&
+      (github.event_name == 'push' || github.event.inputs.action != 'build-only')
+    needs: [ test, build ]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      target_env: >-
+        ${{
+          github.event_name == 'workflow_dispatch'
+          && github.event.inputs.environment
+          || (github.ref == 'refs/heads/main' && 'prod')
+          || 'dev'
+        }}
+    secrets: inherit

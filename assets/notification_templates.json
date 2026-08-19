@@ -1,0 +1,287 @@
+[
+    {
+        "id": 6,
+        "key": "DEADLINE_DATE_AT_PEER_REVIEW",
+        "title": {
+            "en": "Deadline approaching for expert review of application {{.Number}}",
+            "ru": "Приближается срок экспертной проверки заявки {{.Number}}",
+            "uz": "{{.Number}}-raqamli arizaning Taqriz muddati yaqinlashmoqda"
+        },
+        "body": {
+            "en": "Application №{{.Number}} must be reviewed by {{.Deadline}}. Time remaining: {{.Days}} days and {{.Hours}} hours.",
+            "ru": "Заявку №{{.Number}} необходимо проверить до {{.Deadline}}. Осталось времени: {{.Days}} дней и {{.Hours}} часов.",
+            "uz": "{{.Number}}-raqamli arizani {{.Deadline}} gacha Taqriz bosqichida tekshirish kerak. Qolgan vaqt: {{.Days}} kun va {{.Hours}} soat."
+        },
+        "created_at": "2025-12-09T11:44:33+00:00"
+    },
+    {
+        "id": 4,
+        "key": "DEADLINE_DATE_AT_TECHNICAL_REVIEW",
+        "title": {
+            "en": "Deadline approaching for application {{.Number}}",
+            "ru": "Приближается срок проверки заявки {{.Number}}",
+            "uz": "{{.Number}}-raqamli arizani tekshirish muddati yaqinlashmoqda"
+        },
+        "body": {
+            "en": "Application №{{.Number}} must be reviewed by {{.Deadline}}. Time remaining: {{.Days}} days and {{.Hours}} hours.",
+            "ru": "Заявку №{{.Number}} необходимо проверить до {{.Deadline}}. Осталось времени: {{.Days}} дней и {{.Hours}} часов.",
+            "uz": "{{.Number}}-raqamli arizani {{.Deadline}} gacha tekshirish kerak. Qolgan vaqt: {{.Days}} kun va {{.Hours}} soat."
+        },
+        "created_at": "2025-12-09T11:35:55+00:00"
+    },
+    {
+        "id": 1,
+        "key": "APPLICATION_ACCEPTED_AT_TECHNICAL_REVIEW",
+        "title": {
+            "en": "[SLIB.uz] Your application with number {{.Number}} has been approved",
+            "ru": "[SLIB.uz] Ваша заявка под номером {{.Number}} одобрена",
+            "uz": "[SLIB.uz] {{.Number}}-raqamli arizangiz tasdiqlandi"
+        },
+        "body": {
+            "en": "Your application №{{.Number}} on the SLIB.uz platform has been successfully approved. You can view the next steps in your profile.",
+            "ru": "Ваша заявка №{{.Number}} на платформе SLIB.uz успешно одобрена. Вы можете ознакомиться с дальнейшими шагами в личном кабинете.",
+            "uz": "SLIB.uz platformasidagi {{.Number}}-raqamli arizangiz muvaffaqiyatli tasdiqlandi. Keyingi bosqichlarni profilingiz orqali ko‘rishingiz mumkin."
+        },
+        "created_at": "2025-12-09T07:50:15+00:00"
+    },
+    {
+        "id": 2,
+        "key": "APPLICATION_REJECTED_AT_TECHNICAL_REVIEW",
+        "title": {
+            "en": "[SLIB.uz] Your application with number {{.Number}} has been rejected",
+            "ru": "[SLIB.uz] Ваша заявка под номером {{.Number}} отклонена",
+            "uz": "[SLIB.uz] {{.Number}}-raqamli arizangiz rad etildi"
+        },
+        "body": {
+            "en": "Unfortunately, your application №{{.Number}} on the SLIB.uz platform did not pass the review process. You can check the reason in your profile.",
+            "ru": "К сожалению, ваша заявка №{{.Number}} на платформе SLIB.uz не прошла проверку. Причину вы можете узнать в личном кабинете.",
+            "uz": "Afsuski, SLIB.uz platformasidagi {{.Number}}-raqamli arizangiz ko‘rib chiqish jarayonidan o‘tmadi. Sababini profilingizda ko‘rishingiz mumkin."
+        },
+        "created_at": "2025-12-09T07:55:08+00:00"
+    },
+    {
+        "id": 3,
+        "key": "APPLICATION_RESENT",
+        "title": {
+            "en": "Application {{.Number}} has been resubmitted for technical review",
+            "ru": "Заявка {{.Number}} повторно отправлена на техническую проверку",
+            "uz": "{{.Number}}-raqamli ariza texnik ko‘rib chiqish uchun qayta yuborildi"
+        },
+        "body": {
+            "en": "Application №{{.Number}} has been resubmitted for technical review and requires your attention.",
+            "ru": "Заявка №{{.Number}} повторно отправлена на техническую проверку и требует вашего внимания.",
+            "uz": "{{.Number}}-raqamli ariza texnik ko‘rib chiqish uchun qayta yuborildi va sizning diqqat-ingizni talab qiladi."
+        },
+        "created_at": "2025-12-09T11:00:22+00:00"
+    },
+    {
+        "id": 5,
+        "key": "DEADLINE_DATE_AT_PAYMENT_STAGE",
+        "title": {
+            "en": "Payment deadline approaching for application {{.Number}}",
+            "ru": "Приближается срок оплаты заявки {{.Number}}",
+            "uz": "{{.Number}}-raqamli ariza uchun to‘lov muddati yaqinlashmoqda"
+        },
+        "body": {
+            "en": "Payment for application №{{.Number}} must be made by {{.Deadline}} to proceed. Time remaining: {{.Days}} days and {{.Hours}} hours.",
+            "ru": "Оплату за заявку №{{.Number}} необходимо произвести до {{.Deadline}}. Осталось времени: {{.Days}} дней и {{.Hours}} часов.",
+            "uz": "{{.Number}}-raqamli ariza uchun to‘lov {{.Deadline}} gacha amalga oshirilishi kerak. Qolgan vaqt: {{.Days}} kun va {{.Hours}} soat."
+        },
+        "created_at": "2025-12-09T11:40:07+00:00"
+    },
+    {
+        "id": 7,
+        "key": "DEADLINE_DATE_AT_PUBLISH_STAGE",
+        "title": {
+            "en": "Deadline approaching for publication of application {{.Number}}",
+            "ru": "Приближается срок публикации заявки {{.Number}}",
+            "uz": "{{.Number}}-raqamli arizaning nashr etish muddati yaqinlashmoqda"
+        },
+        "body": {
+            "en": "Application №{{.Number}} must be published by {{.Deadline}}. Time remaining: {{.Days}} days and {{.Hours}} hours.",
+            "ru": "Заявка №{{.Number}} должна быть опубликована до {{.Deadline}}. Осталось времени: {{.Days}} дней и {{.Hours}} часов.",
+            "uz": "{{.Number}}-raqamli ariza {{.Deadline}} gacha nashr etilishi kerak. Qolgan vaqt: {{.Days}} kun va {{.Hours}} soat."
+        },
+        "created_at": "2025-12-09T11:50:07+00:00"
+    },
+    {
+        "id": 8,
+        "key": "NEW_PEER_REVIEW",
+        "title": {
+            "en": "Application №{{.Number}} has been sent for peer review",
+            "ru": "Заявка №{{.Number}} отправлена на рецензирование",
+            "uz": "{{.Number}}-raqamli ariza taqriz bosqichiga yuborildi"
+        },
+        "body": {
+            "en": "Application №{{.Number}} has been sent for peer review. Please monitor the review process.",
+            "ru": "Заявка №{{.Number}} отправлена на рецензирование. Пожалуйста, следите за процессом рецензирования.",
+            "uz": "{{.Number}}-raqamli ariza taqriz bosqichiga yuborildi. Iltimos, retsenziya jarayonini kuzatib boring."
+        },
+        "created_at": "2025-12-09T12:03:32+00:00"
+    },
+    {
+        "id": 10,
+        "key": "ANTI_PLAGIARISM_CHECK_FINISHED",
+        "title": {
+            "en": "Anti-plagiarism check for application №{{.Number}} has been completed",
+            "ru": "Проверка на плагиат заявки №{{.Number}} завершена",
+            "uz": "{{.Number}}-raqamli ariza uchun plagiat tekshiruvi yakunlandi"
+        },
+        "body": {
+            "en": "The anti-plagiarism check for application №{{.Number}} has been successfully completed.",
+            "ru": "Проверка на плагиат заявки №{{.Number}} успешно завершена.",
+            "uz": "{{.Number}}-raqamli ariza bo‘yicha plagiat tekshiruvi yakunlandi."
+        },
+        "created_at": "2025-12-09T12:09:41+00:00"
+    },
+    {
+        "id": 9,
+        "key": "SPELL_CHECK_FINISHED",
+        "title": {
+            "en": "Spell check for application №{{.Number}} has been completed",
+            "ru": "Орфографическая проверка заявки №{{.Number}} завершена",
+            "uz": "{{.Number}}-raqamli ariza uchun imlo tekshiruvi yakunlandi"
+        },
+        "body": {
+            "en": "The spell check for application №{{.Number}} has been successfully completed.",
+            "ru": "Орфографическая проверка заявки №{{.Number}} успешно завершена.",
+            "uz": "{{.Number}}-raqamli ariza bo‘yicha imlo tekshiruvi muvaffaqiyatli yakunlandi."
+        },
+        "created_at": "2025-12-09T12:07:18+00:00"
+    },
+    {
+        "id": 11,
+        "key": "NEW_APPLICATION",
+        "title": {
+            "en": "New application №{{.Number}}",
+            "ru": "Новая заявка №{{.Number}}",
+            "uz": "Yangi ariza: №{{.Number}}"
+        },
+        "body": {
+            "en": "A new application №{{.Number}} has been submitted by the author. Please begin the review process.",
+            "ru": "Автор подал новую заявку №{{.Number}}. Пожалуйста, начните её рассмотрение.",
+            "uz": "Muallif tomonidan yangi ariza №{{.Number}} topshirildi. Iltimos, uni ko‘rib chiqishni boshlang."
+        },
+        "created_at": "2025-12-09T12:13:07+00:00"
+    },
+    {
+        "id": 12,
+        "key": "APPLICATION_PUBLISHED",
+        "title": {
+            "en": "Application №{{.Number}} has been successfully published",
+            "ru": "Статья №{{.Number}} успешно опубликована",
+            "uz": "{{.Number}}-raqamli maqola nashr qilindi"
+        },
+        "body": {
+            "en": "Application №{{.Number}} has been successfully published. Congratulations!",
+            "ru": "Статья №{{.Number}} успешно опубликована. Поздравляем!",
+            "uz": "{{.Number}}-raqamli maqola muvaffaqiyatli nashr qilindi. Tabriklaymiz!"
+        },
+        "created_at": "2025-12-09T12:18:22+00:00"
+    },
+    {
+        "id": 13,
+        "key": "APPLICATION_ACCEPTED_AT_PEER_REVIEW",
+        "title": {
+            "en": "Application №{{.Number}} accepted after peer review",
+            "ru": "Заявка №{{.Number}} принята после рецензирования",
+            "uz": "{{.Number}}-raqamli ariza taqriz bosqichidan o‘tdi"
+        },
+        "body": {
+            "en": "Application №{{.Number}} has been accepted after peer review.",
+            "ru": "Заявка №{{.Number}} принята после рецензирования.",
+            "uz": "{{.Number}}-raqamli ariza taqriz bosqichidan muvaffaqiyatli o‘tdi"
+        },
+        "created_at": "2025-12-09T12:21:44+00:00"
+    },
+    {
+        "id": 14,
+        "key": "APPLICATION_REJECTED_AT_PEER_REVIEW",
+        "title": {
+            "en": "Application №{{.Number}} rejected after peer review",
+            "ru": "Заявка №{{.Number}} отклонена после рецензирования",
+            "uz": "{{.Number}}-raqamli ariza taqrizdan o‘tmadi"
+        },
+        "body": {
+            "en": "Application №{{.Number}} has been rejected after peer review. Reason: {{.Reason}}",
+            "ru": "Заявка №{{.Number}} была отклонена после peer review. Причина: {{.Reason}}",
+            "uz": "{{.Number}}-raqamli ariza taqriz bosqichidan o‘tmadi. Sabab: {{.Reason}}"
+        },
+        "created_at": "2025-12-09T12:24:34+00:00"
+    },
+    {
+        "id": 15,
+        "key": "PAY_TO_PUBLISH_ARTICLE",
+        "title": {
+            "en": "Payment required to publish application №{{.Number}}",
+            "ru": "Требуется оплата для публикации заявки №{{.Number}}",
+            "uz": "{{.Number}}-raqamli maqolani nashr qilish uchun to‘lov talab qilinadi"
+        },
+        "body": {
+            "en": "To publish application №{{.Number}}, a payment of {{.Amount}} UZS is required.",
+            "ru": "Для публикации заявки №{{.Number}} необходимо оплатить {{.Amount}} сум.",
+            "uz": "{{.Number}}-raqamli maqolani nashr qilish uchun {{.Amount}} so‘m to‘lov amalga oshirilishi kerak."
+        },
+        "created_at": "2025-12-09T12:27:12+00:00"
+    },
+    {
+        "id": 16,
+        "key": "APPLICATION_PAYMENT_SUCCESSFUL",
+        "title": {
+            "en": "Payment for publishing application №{{.Number}} confirmed",
+            "ru": "Оплата публикации заявки №{{.Number}} успешно подтверждена",
+            "uz": "{{.Number}}-raqamli maqolani nashr qilish bo‘yicha to‘lov tasdiqlandi"
+        },
+        "body": {
+            "en": "Payment for application №{{.Number}} has been successfully confirmed.",
+            "ru": "Оплата за публикацию заявки №{{.Number}} успешно подтверждена.",
+            "uz": "{{.Number}}-raqamli maqola uchun to‘lov muvaffaqiyatli amalga oshirildi."
+        },
+        "created_at": "2025-12-09T12:29:24+00:00"
+    },
+    {
+        "id": 17,
+        "key": "NEW_SUPPORT_QUESTION",
+        "title": {
+            "en": "New support question (Chat ID: {{.ChatID}})",
+            "ru": "Новый вопрос (Chat ID: {{.ChatID}})",
+            "uz": "Yangi savol (Chat ID: {{.ChatID}})"
+        },
+        "body": {
+            "en": "A new support question has been submitted:\n\n{{.Message}}",
+            "ru": "Поступил новый вопрос:\n\n{{.Message}}",
+            "uz": "Yangi savol yuborildi:\n\n{{.Message}}"
+        },
+        "created_at": "2025-12-09T12:33:59+00:00"
+    },
+    {
+        "id": 18,
+        "key": "NEW_SUPPORT_ANSWER",
+        "title": {
+            "en": "New support answer (Chat ID: {{.ChatID}})",
+            "ru": "Новый ответ (Chat ID: {{.ChatID}})",
+            "uz": "Yangi javob (Chat ID: {{.ChatID}})"
+        },
+        "body": {
+            "en": "A new answer has been added to your support request:\n\n{{.Message}}",
+            "ru": "Получен ответ на ваш вопрос:\n\n{{.Message}}",
+            "uz": "Sizning savolingizga javob berildi:\n\n{{.Message}}"
+        },
+        "created_at": "2025-12-09T12:40:59+00:00"
+    },
+    {
+        "id": 19,
+        "key": "AI_DETECT_CHECK_FINISHED",
+        "title": {
+            "en": "AI detection check for application №{{.Number}} has been completed",
+            "ru": "Проверка на ИИ-контент заявки №{{.Number}} завершена",
+            "uz": "{{.Number}}-raqamli ariza uchun AI tekshiruvi yakunlandi"
+        },
+        "body": {
+            "en": "The AI detection check for application №{{.Number}} has been successfully completed.",
+            "ru": "Проверка на ИИ-контент заявки №{{.Number}} успешно завершена.",
+            "uz": "{{.Number}}-raqamli ariza bo'yicha AI tekshiruvi yakunlandi."
+        },
+        "created_at": "2026-05-07T10:00:00+00:00"
+    }
+]

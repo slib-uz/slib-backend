@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  workflow_call:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_BASE: ${{ github.repository_owner }}/slib/app
+
+jobs:
+  build:
+    runs-on:
+      - self-hosted
+      - Linux
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set image tag
+        id: meta
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            echo "image=${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}-dev:latest" >> "$GITHUB_OUTPUT"
+          else
+            echo "image=${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}:latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Log in to GHCR
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" \
+            | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Build and push
+        run: |
+          docker build -f docker/Dockerfile -t "${{ steps.meta.outputs.image }}" .
+          docker push "${{ steps.meta.outputs.image }}"

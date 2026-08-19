@@ -1,0 +1,84 @@
+services:
+
+  app:
+    image: ghcr.io/integrum-inc/slib/app:latest
+    container_name: slib-app
+    entrypoint: [ "./app", "--mode", "http" ]
+
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./../assets:/app/assets
+      - ./../uploads:/app/uploads
+      - ./../logs:/app/logs
+    env_file:
+      - ../env/.env
+    networks:
+      - shared_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    restart: unless-stopped
+
+  slib-redis:
+    image: redis:7.4-alpine
+    command: redis-server
+    container_name: slib-redis-queue
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.volumes/redis:/data
+    networks:
+      - shared_network
+
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+    restart: unless-stopped
+
+
+  task-worker:
+    image: ghcr.io/integrum-inc/slib/app:latest
+    container_name: slib-task-worker
+    entrypoint: [ "./app", "--mode", "task-worker" ]
+
+    volumes:
+      - ./../assets:/app/assets
+      - ./../uploads:/app/uploads
+    env_file:
+      - ../env/.env
+    depends_on:
+      slib-redis:
+        condition: service_healthy
+    networks:
+      - shared_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    restart: unless-stopped
+
+  scheduler:
+    image: ghcr.io/integrum-inc/slib/app:latest
+    container_name: slib-scheduler
+    entrypoint: [ "./app", "--mode", "scheduler" ]
+
+    env_file:
+      - ../env/.env
+    depends_on:
+      slib-redis:
+        condition: service_healthy
+    networks:
+      - shared_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    restart: unless-stopped
+
+
+networks:
+  shared_network:
+    driver: bridge

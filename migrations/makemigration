@@ -1,0 +1,25 @@
+ATLASGO := atlas
+
+# makemigrations for development
+db-diff-dev:
+	@echo "💻 Generating migration files..."
+	@$(ATLASGO) migrate diff --env gorm-dev
+
+# makemigrations for production
+db-diff-prod:
+	@echo "💻 Generating migration files..."
+	@$(ATLASGO) migrate diff --env gorm-prod
+
+
+def-db-hash:
+	@echo "If hash is not found, please run the following command:"
+	@$(ATLASGO) migrate hash --env gorm-dev
+
+
+migrate-hash-dev:
+	@echo "If hash is not found, please run the following command:"
+	@$(ATLASGO) migrate hash --env gorm-dev
+
+migrate-hash-prod:
+	@echo "If hash is not found, please run the following command:"
+	@$(ATLASGO) migrate hash --env gorm-prod
